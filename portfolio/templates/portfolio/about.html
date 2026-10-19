@@ -1,0 +1,34 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+{% block title %}About | {{ profile.full_name }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container-xxl"><h1>About me</h1></div></section>
+<section class="block pt-0">
+  <div class="container-xxl about-grid">
+    <div class="about-photo">
+      <div class="arch arch-sm">
+        <img src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'portfolio/images/profile.jpg' %}{% endif %}" alt="Portrait of {{ profile.full_name }}" loading="lazy">
+      </div>
+    </div>
+    <div class="about-copy">
+      {% for para in profile.bio_paragraphs %}<p class="lead-p">{{ para }}</p>{% endfor %}
+      <div class="about-cols">
+        {% if profile.interest_list %}
+        <div class="panel">
+          <h2 class="panel-title"><i class="bi bi-stars"></i> Interests</h2>
+          <ul class="tick-list">{% for i in profile.interest_list %}<li>{{ i }}</li>{% endfor %}</ul>
+        </div>{% endif %}
+        {% if profile.career_goal %}
+        <div class="panel">
+          <h2 class="panel-title"><i class="bi bi-bullseye"></i> Career goal</h2>
+          <p class="mb-0">{{ profile.career_goal }}</p>
+        </div>{% endif %}
+      </div>
+      <div class="about-links">
+        <a class="btn-main" href="{% url 'portfolio:resume' %}"><i class="bi bi-file-earmark-person"></i> View my resume</a>
+        <a class="btn-ghost" href="{% url 'portfolio:contact' %}"><i class="bi bi-envelope"></i> Get in touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

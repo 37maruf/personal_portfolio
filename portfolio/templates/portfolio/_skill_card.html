@@ -1,0 +1,12 @@
+<div class="rc skill-card" tabindex="0" aria-expanded="false">
+  <div class="rc-front">
+    <span class="rc-icon"><i class="bi {{ cat.icon }}"></i></span>
+    <h3>{{ cat.name }}</h3>
+    <p class="rc-hint">{{ cat.skills.all|length }} skill{{ cat.skills.all|length|pluralize }}. Hover or tap to see</p>
+  </div>
+  <div class="rc-back">
+    <h3>{{ cat.name }}</h3>
+    {% if cat.summary %}<p class="rc-sum">{{ cat.summary }}</p>{% endif %}
+    <ul class="chips">{% for s in cat.skills.all %}<li>{{ s.name }}</li>{% endfor %}</ul>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Contact | {{ profile.full_name }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container-xxl"><h1>Contact</h1><p>Have a question or a project in mind? Send me a message.</p></div></section>
+<section class="block pt-0">
+  <div class="container-xxl contact-grid">
+    <div class="contact-info">
+      <div class="panel">
+        <h2 class="panel-title">Reach me directly</h2>
+        <ul class="info-list">
+          {% if profile.email %}<li><i class="bi bi-envelope-fill"></i><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></li>{% endif %}
+          {% if profile.phone %}<li><i class="bi bi-telephone-fill"></i><a href="tel:{{ profile.phone }}">{{ profile.phone }}</a></li>{% endif %}
+        </ul>
+        <h3 class="panel-sub">Find me online</h3>
+        {% include "portfolio/_social.html" with css="social-card" %}
+      </div>
+    </div>
+    <form class="panel contact-form" method="post" novalidate>
+      {% csrf_token %}
+      <div class="hp" aria-hidden="true">{{ form.website }}</div>
+      {% for field in form.visible_fields %}
+        {% if field.name != "website" %}
+        <div class="field {% if field.errors %}has-error{% endif %}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% for err in field.errors %}<p class="field-error"><i class="bi bi-exclamation-circle"></i> {{ err }}</p>{% endfor %}
+        </div>
+        {% endif %}
+      {% endfor %}
+      {% for err in form.website.errors %}<p class="field-error">{{ err }}</p>{% endfor %}
+      <button class="btn-main" type="submit"><i class="bi bi-send-fill"></i> Send message</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

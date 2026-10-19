@@ -1,0 +1,77 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ profile.full_name|default:"Portfolio" }}{% endblock %}</title>
+  <meta name="description" content="Portfolio of {{ profile.full_name|default:'a developer' }}: education, skills, projects and contact.">
+  <script>
+    /* Set the saved theme before the page paints, so it does not flash */
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'portfolio/vendor/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'portfolio/vendor/bootstrap-icons/bootstrap-icons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="navbar navbar-expand-xl site-nav" aria-label="Main">
+    <div class="container-xxl">
+      <a class="navbar-brand brand" href="{% url 'portfolio:home' %}">
+        <span class="brand-mark">MK</span>
+        <span class="brand-name">{{ profile.full_name|default:"Portfolio" }}</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+              aria-controls="navMenu" aria-expanded="false" aria-label="Open menu">
+        <i class="bi bi-list"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav mx-xl-auto">
+          {% url 'portfolio:home' as u_home %}{% url 'portfolio:about' as u_about %}
+          {% url 'portfolio:education' as u_edu %}{% url 'portfolio:experience' as u_exp %}
+          {% url 'portfolio:skills' as u_skills %}{% url 'portfolio:projects' as u_proj %}
+          {% url 'portfolio:resume' as u_res %}{% url 'portfolio:contact' as u_con %}
+          <li class="nav-item"><a class="nav-link {% if request.path == u_home %}active{% endif %}" href="{{ u_home }}">Home</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.path == u_about %}active{% endif %}" href="{{ u_about }}">About</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.path == u_edu %}active{% endif %}" href="{{ u_edu }}">Education</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.path == u_exp %}active{% endif %}" href="{{ u_exp }}">Experience</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.path == u_skills %}active{% endif %}" href="{{ u_skills }}">Skills</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.path == u_proj %}active{% endif %}" href="{{ u_proj }}">Projects</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.path == u_res %}active{% endif %}" href="{{ u_res }}">Resume</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.path == u_con %}active{% endif %}" href="{{ u_con }}">Contact</a></li>
+        </ul>
+        <div class="nav-tools">
+          {% include "portfolio/_social.html" with css="social-nav" %}
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch light and dark theme">
+            <i class="bi bi-sun-fill icon-sun"></i><i class="bi bi-moon-stars-fill icon-moon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {% if messages %}
+  <div class="container-xxl toast-zone">
+    {% for message in messages %}
+    <div class="alert-note {{ message.tags }}" role="status"><i class="bi {% if message.tags == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-triangle-fill{% endif %}"></i> {{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main id="main">{% block content %}{% endblock %}</main>
+
+  <footer class="site-footer">
+    <div class="container-xxl footer-inner">
+      <p class="mb-0">&copy; {% now "Y" %} {{ profile.full_name }}. Built with Python and Django.</p>
+      {% include "portfolio/_social.html" with css="social-foot" %}
+    </div>
+  </footer>
+
+  <script src="{% static 'portfolio/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'portfolio/js/main.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Skills | {{ profile.full_name }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container-xxl"><h1>Skills</h1><p>Hover over a card, or tap it, to see the skills inside.</p></div></section>
+<section class="block pt-0">
+  <div class="container-xxl">
+    <div class="grid-cards">
+      {% for cat in categories %}{% include "portfolio/_skill_card.html" %}{% empty %}
+      <p class="empty">No skills yet. Add them in the admin panel.</p>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

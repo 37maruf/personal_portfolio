@@ -1,0 +1,22 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Education | {{ profile.full_name }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container-xxl"><h1>Education</h1><p>My academic path, newest first.</p></div></section>
+<section class="block pt-0">
+  <div class="container-xxl narrow">
+    <ol class="timeline">
+      {% for e in items %}
+      <li class="tl-item">
+        <span class="tl-dot"><i class="bi bi-mortarboard-fill"></i></span>
+        <div class="tl-card">
+          <div class="tl-top"><span class="level">{{ e.level }}</span><span class="when">{{ e.year }}</span></div>
+          <h2>{{ e.degree }}</h2>
+          <p class="where">{{ e.institution }}</p>
+          <p class="result"><i class="bi bi-award-fill"></i> {{ e.result }}</p>
+        </div>
+      </li>
+      {% empty %}<p class="empty">No education added yet. Add it in the admin panel.</p>{% endfor %}
+    </ol>
+  </div>
+</section>
+{% endblock %}

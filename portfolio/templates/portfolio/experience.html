@@ -1,0 +1,21 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Experience | {{ profile.full_name }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container-xxl"><h1>Experience</h1><p>Where I have worked and what I did there.</p></div></section>
+<section class="block pt-0">
+  <div class="container-xxl narrow">
+    <ol class="timeline">
+      {% for x in items %}
+      <li class="tl-item">
+        <span class="tl-dot"><i class="bi bi-briefcase-fill"></i></span>
+        <div class="tl-card">
+          <div class="tl-top"><span class="level">{{ x.company }}</span>{% if x.period %}<span class="when">{{ x.period }}</span>{% endif %}</div>
+          <h2>{{ x.title }}</h2>
+          <ul class="tick-list">{% for pt in x.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+        </div>
+      </li>
+      {% empty %}<p class="empty">No experience added yet. Add it in the admin panel.</p>{% endfor %}
+    </ol>
+  </div>
+</section>
+{% endblock %}

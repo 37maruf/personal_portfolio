@@ -1,0 +1,30 @@
+{% extends "portfolio/base.html" %}
+{% block title %}{{ p.title }} | {{ profile.full_name }}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container-xxl">
+    <a class="back-link" href="{% url 'portfolio:projects' %}"><i class="bi bi-arrow-left"></i> All projects</a>
+    <h1>{{ p.title }}</h1>
+  </div>
+</section>
+<section class="block pt-0">
+  <div class="container-xxl narrow">
+    <div class="panel">
+      <div class="detail-section">
+        <h2><i class="bi bi-card-text"></i> Description</h2>
+        <p class="detail-desc">{{ p.description }}</p>
+      </div>
+      <div class="detail-section">
+        <h2><i class="bi bi-cpu"></i> Technologies used</h2>
+        <ul class="chips">{% for t in p.tech_list %}<li>{{ t }}</li>{% endfor %}</ul>
+      </div>
+      {% if p.github_url or p.live_url %}
+      <div class="detail-actions">
+        {% if p.github_url %}<a class="btn-ghost" href="{{ p.github_url }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-github"></i> View on GitHub</a>{% endif %}
+        {% if p.live_url %}<a class="btn-main" href="{{ p.live_url }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-box-arrow-up-right"></i> Live demo</a>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

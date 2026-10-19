@@ -1,0 +1,7 @@
+<article class="project-card">
+  <span class="rc-icon"><i class="bi bi-folder2-open"></i></span>
+  <h3>{{ p.title }}</h3>
+  <p class="pc-desc">{{ p.description|truncatechars:110 }}</p>
+  <ul class="chips chips-sm">{% for t in p.tech_list|slice:":4" %}<li>{{ t }}</li>{% endfor %}</ul>
+  <a class="btn-soft" href="{% url 'portfolio:project_detail' p.pk %}">View details <i class="bi bi-arrow-right"></i></a>
+</article>

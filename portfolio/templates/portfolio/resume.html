@@ -1,0 +1,22 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Resume | {{ profile.full_name }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container-xxl"><h1>Resume</h1><p>Read it here or download a copy.</p></div></section>
+<section class="block pt-0">
+  <div class="container-xxl narrow">
+    {% if has_cv %}
+    <div class="resume-actions">
+      <a class="btn-main" href="{{ profile.cv.url }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-eye"></i> Open in new tab</a>
+      <a class="btn-ghost" href="{% url 'portfolio:resume' %}?download=1"><i class="bi bi-download"></i> Download CV</a>
+    </div>
+    <iframe class="cv-frame" src="{{ profile.cv.url }}#toolbar=0" title="Resume of {{ profile.full_name }}"></iframe>
+    {% else %}
+    <div class="panel empty-panel">
+      <i class="bi bi-file-earmark-arrow-up"></i>
+      <h2>CV not uploaded yet</h2>
+      <p>Upload your PDF in the admin panel, under Profile, then Resume.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

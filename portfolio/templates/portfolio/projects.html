@@ -1,0 +1,13 @@
+{% extends "portfolio/base.html" %}
+{% block title %}Projects | {{ profile.full_name }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container-xxl"><h1>Projects</h1><p>Open a project to see its full details and links.</p></div></section>
+<section class="block pt-0">
+  <div class="container-xxl">
+    <div class="grid-cards projects-grid">
+      {% for p in projects %}{% include "portfolio/_project_card.html" %}{% empty %}
+      <p class="empty">No projects yet. Add your first project in the admin panel.</p>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

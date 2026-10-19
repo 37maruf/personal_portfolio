@@ -1,0 +1,49 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+{% block content %}
+<section class="hero">
+  <div class="container-xxl hero-grid">
+    <div class="hero-copy">
+      <p class="hero-hello">Hi, I am</p>
+      <h1 class="hero-name">{{ profile.full_name }}</h1>
+      <p class="hero-role" aria-live="off"><span id="typed" data-roles="{{ profile.typed_roles }}">{{ profile.role_list.0 }}</span><span class="caret" aria-hidden="true"></span></p>
+      <p class="hero-tag">{{ profile.tagline }}</p>
+      <div class="hero-cta">
+        <a class="btn-main" href="{% url 'portfolio:projects' %}"><i class="bi bi-grid-1x2-fill"></i> See my projects</a>
+        <a class="btn-ghost" href="{% url 'portfolio:contact' %}"><i class="bi bi-chat-dots"></i> Contact me</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="arch">
+        <img src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'portfolio/images/profile.jpg' %}{% endif %}" alt="Portrait of {{ profile.full_name }}" width="450" height="607">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container-xxl">
+    <div class="block-head">
+      <h2>What I work with</h2>
+      <a class="more" href="{% url 'portfolio:skills' %}">All skills <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="grid-cards">
+      {% for cat in categories %}{% include "portfolio/_skill_card.html" %}{% empty %}
+      <p class="empty">No skills yet. Add them in the admin panel.</p>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container-xxl">
+    <div class="block-head">
+      <h2>Recent projects</h2>
+      <a class="more" href="{% url 'portfolio:projects' %}">All projects <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="grid-cards projects-grid">
+      {% for p in projects %}{% include "portfolio/_project_card.html" %}{% empty %}
+      <p class="empty">No projects yet. Add your first project in the admin panel.</p>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

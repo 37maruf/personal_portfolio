@@ -1,0 +1,9 @@
+{% if profile %}
+<ul class="social {{ css }}">
+  {% if profile.facebook_url %}<li><a href="{{ profile.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a></li>{% endif %}
+  {% if profile.github_url %}<li><a href="{{ profile.github_url }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><i class="bi bi-github"></i></a></li>{% endif %}
+  {% if profile.linkedin_url %}<li><a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="bi bi-linkedin"></i></a></li>{% endif %}
+  {% if profile.email %}<li><a href="mailto:{{ profile.email }}" aria-label="Gmail" title="Email"><i class="bi bi-envelope-fill"></i></a></li>{% endif %}
+  {% if profile.whatsapp_url %}<li><a href="{{ profile.whatsapp_url }}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp"><i class="bi bi-whatsapp"></i></a></li>{% endif %}
+</ul>
+{% endif %}
