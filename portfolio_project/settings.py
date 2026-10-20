@@ -27,7 +27,7 @@ if not SECRET_KEY:
     else:
         raise RuntimeError("Set DJANGO_SECRET_KEY when DJANGO_DEBUG is False.")
 
-ALLOWED_HOSTS = [h.strip() for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") if h.strip()]
+ALLOWED_HOSTS = ['.vercel.app']
 
 # The admin lives at a private address instead of /admin/
 ADMIN_URL = os.environ.get("ADMIN_URL", "control-room-mk").strip("/") + "/"
